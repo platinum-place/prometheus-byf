@@ -1,0 +1,35 @@
+<?php
+
+use App\Models\Customer\Customer;
+use App\Models\Customer\Contact;
+use App\Enums\Status;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('contacts', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->softDeletes();
+            $table->foreignIdFor(Customer::class)->nullable()->constrained();
+            $table->enum('status', Status::values());
+            $table->string('name');
+            $table->string('phone');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('contacts');
+    }
+};
