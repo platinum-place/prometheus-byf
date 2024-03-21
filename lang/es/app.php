@@ -14,4 +14,6 @@ return [
     'created_at' => 'Creado en',
     'updated_at' => 'Actualizado en',
     'deleted_at' => 'Eliminado en',
+    'contact' => 'Contacto',
+    'contacts' => 'Contactos',
 ];
