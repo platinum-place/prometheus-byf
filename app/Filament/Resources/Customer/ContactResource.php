@@ -43,34 +43,30 @@ class ContactResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema(array_merge(
-                [],
-                \App\Filament\Components\Forms\ContactForm::basicForm(),
-            ));
+            ->schema(
+                \App\Filament\Schemas\ContactForm::form(),
+            );
     }
 
     public static function table(Table $table, bool $relation_manager = false, int $owner_id = null): Table
     {
         return $table
-            ->columns(array_merge(
-                [],
-                \App\Filament\Components\Tables\ContactTableColumns::contactColumns(),
-            ))
+            ->columns(
+                \App\Filament\Columns\ContactColumns::columns()
+            )
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->headerActions([
                 //
             ])
-            ->actions(array_merge(
-                [],
-                \App\Filament\Components\Tables\TableActions::basicActions(),
-            ))
+            ->actions(
+                \App\Filament\Actions\BaseTableActions::actions()
+            )
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make(array_merge(
-                    [],
-                    \App\Filament\Components\Tables\TableActions::bulkActions(),
-                )),
+                Tables\Actions\BulkActionGroup::make(
+                    \App\Filament\Actions\BaseTableActions::bulkActions()
+                ),
             ]);
     }
 

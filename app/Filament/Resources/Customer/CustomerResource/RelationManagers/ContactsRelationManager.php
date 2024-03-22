@@ -39,10 +39,9 @@ class ContactsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->columns(array_merge(
-                [],
-                \App\Filament\Components\Tables\ContactTableColumns::contactColumns(),
-            ))
+            ->columns(
+                \App\Filament\Columns\ContactColumns::columns()
+            )
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
@@ -52,15 +51,13 @@ class ContactsRelationManager extends RelationManager
                     ->importer(ContactRelationImporter::class)
                     ->options(['customer_id' => $this->getOwnerRecord()->getKey()])
             ])
-            ->actions(array_merge(
-                [],
-                \App\Filament\Components\Tables\TableActions::basicActions(),
-            ))
+            ->actions(
+                \App\Filament\Actions\BaseTableActions::actions()
+            )
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make(array_merge(
-                    [],
-                    \App\Filament\Components\Tables\TableActions::bulkActions(),
-                )),
+                Tables\Actions\BulkActionGroup::make(
+                    \App\Filament\Actions\BaseTableActions::bulkActions()
+                ),
             ]);
     }
 }

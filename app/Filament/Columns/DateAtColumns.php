@@ -1,25 +1,18 @@
 <?php
 
-namespace App\Filament\Components\Tables;
+namespace App\Filament\Columns;
 
+use Filament\Forms;
 use Filament\Tables;
+use App\Enums\Status;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Section;
 
-class TableActions
+class DateAtColumns
 {
-    public static function basicActions()
+    public static function columns($array = [])
     {
-        return [
-            Tables\Actions\ViewAction::make(),
-            Tables\Actions\EditAction::make(),
-            Tables\Actions\DeleteAction::make(),
-            Tables\Actions\ForceDeleteAction::make(),
-            Tables\Actions\RestoreAction::make(),
-        ];
-    }
-
-    public static function tabletAtDates()
-    {
-        return [
+        return array_merge($array, [
             Tables\Columns\TextColumn::make('created_at')
                 ->label(__('app.created_at'))
                 ->dateTime('d/m/Y h:i A')
@@ -35,15 +28,6 @@ class TableActions
                 ->dateTime('d/m/Y h:i A')
                 ->sortable()
                 ->toggleable(isToggledHiddenByDefault: true),
-        ];
-    }
-
-    public static function bulkActions()
-    {
-        return [
-            Tables\Actions\DeleteBulkAction::make(),
-            Tables\Actions\ForceDeleteBulkAction::make(),
-            Tables\Actions\RestoreBulkAction::make(),
-        ];
+        ]);
     }
 }
