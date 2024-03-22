@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\Customer\CustomerResource\Pages;
 use App\Filament\Resources\Customer\CustomerResource\RelationManagers;
 use Filament\Forms\Components\Select;
+use Filament\Resources\RelationManagers\RelationGroup;
 
 class CustomerResource extends Resource
 {
@@ -39,74 +40,42 @@ class CustomerResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label(__('app.name'))
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('identification')
-                    ->label(__('app.identification'))
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('phone')
-                    ->label(__('app.phone'))
-                    ->tel()
-                    ->required()
-                    ->maxLength(255),
-                Select::make('status')
-                    ->options(Status::class)
-                    ->required(),
-            ]);
+            ->schema(array_merge(
+                [
+                    Forms\Components\TextInput::make('identification')
+                        ->label(__('app.identification'))
+                        ->required()
+                        ->maxLength(255),
+                ],
+                \App\Filament\Components\Forms\ContactForm::basicForm(),
+            ));
     }
 
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->label(__('app.name'))
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('identification')
-                    ->label(__('app.identification'))
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('phone')
-                    ->label(__('app.phone'))
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('status')
-                    ->badge()
-                    ->label(__('app.status'))
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->label(__('app.created_at'))
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->label(__('app.updated_at'))
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->label(__('app.deleted_at'))
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
+            ->columns(
+                array_merge(
+                    [
+                        Tables\Columns\TextColumn::make('identification')
+                            ->label(__('app.identification'))
+                            ->searchable(),
+                    ],
+                    \App\Filament\Components\Tables\ContactTableColumns::contactColumns(),
+                )
+            )
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
-            ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-                Tables\Actions\RestoreAction::make(),
-            ])
+            ->actions(array_merge(
+                [],
+                \App\Filament\Components\Tables\TableActions::basicActions(),
+            ))
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\ForceDeleteBulkAction::make(),
-                    Tables\Actions\RestoreBulkAction::make(),
-                ]),
+                Tables\Actions\BulkActionGroup::make(array_merge(
+                    [],
+                    \App\Filament\Components\Tables\TableActions::bulkActions(),
+                )),
             ]);
     }
 

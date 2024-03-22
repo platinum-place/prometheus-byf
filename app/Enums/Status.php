@@ -7,13 +7,13 @@ use App\Enums\shared\EnumsTrait;
 use Filament\Support\Contracts\HasLabel;
 use Filament\Support\Contracts\HasColor;
 
-enum Status: string implements HasLabel, HasColor
+enum Status: int implements HasLabel, HasColor
 {
     use EnumsTrait;
 
-    case active = 'active';
+    case active = 1;
 
-    case inactive = 'inactive';
+    case inactive = 2;
 
     public function getColor(): string | array | null
     {

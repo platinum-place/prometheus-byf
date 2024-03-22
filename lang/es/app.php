@@ -10,10 +10,12 @@ return [
     'name' => 'Nombre',
     'identification' => 'Identificación',
     'phone' => 'Teléfono',
-    'status' => 'Estado',
+    'status' => 'Estatus',
     'created_at' => 'Creado en',
     'updated_at' => 'Actualizado en',
     'deleted_at' => 'Eliminado en',
     'contact' => 'Contacto',
     'contacts' => 'Contactos',
+    'update_existing' => 'Actualizar registros existentes',
+    'import_records_alert' => 'Registros importados correctamente. :imported importados, :failed fallidos',
 ];

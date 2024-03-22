@@ -22,13 +22,13 @@ trait EnumsTrait
         return Arr::pluck(static::cases(), 'name');
     }
 
-    public function langValue(): string
+    public function langName(): string
     {
-        return __("app." . $this->value);
+        return __("app." . $this->name);
     }
 
     public function getLabel(): ?string
     {
-        return $this->langValue();
+        return $this->langName();
     }
 }

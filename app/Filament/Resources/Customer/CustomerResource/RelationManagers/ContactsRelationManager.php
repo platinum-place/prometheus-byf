@@ -3,12 +3,19 @@
 namespace App\Filament\Resources\Customer\CustomerResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
+use App\Enums\Status;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Forms\Components\Select;
+use Illuminate\Database\Eloquent\Model;
+use Filament\Tables\Actions\ImportAction;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Imports\Customer\ContactImporter;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\Customer\ContactResource;
+use Filament\Resources\RelationManagers\RelationManager;
+use App\Filament\Imports\Customer\ContactRelationImporter;
 
 class ContactsRelationManager extends RelationManager
 {
@@ -19,42 +26,41 @@ class ContactsRelationManager extends RelationManager
         return __('app.contact');
     }
 
-    public static function getPluralModelLabel(): string
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
-        return __('app.contacts');
+        return __('app.contact');
     }
 
     public function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-            ]);
+        return ContactResource::form($form);
     }
 
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('name')
-            ->columns([
-                Tables\Columns\TextColumn::make('name'),
-            ])
+            ->columns(array_merge(
+                [],
+                \App\Filament\Components\Tables\ContactTableColumns::contactColumns(),
+            ))
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
+                ImportAction::make()
+                    ->importer(ContactRelationImporter::class)
+                    ->options(['customer_id' => $this->getOwnerRecord()->getKey()])
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-            ])
+            ->actions(array_merge(
+                [],
+                \App\Filament\Components\Tables\TableActions::basicActions(),
+            ))
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                Tables\Actions\BulkActionGroup::make(array_merge(
+                    [],
+                    \App\Filament\Components\Tables\TableActions::bulkActions(),
+                )),
             ]);
     }
 }
