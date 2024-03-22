@@ -2,20 +2,18 @@
 
 namespace App\Filament\Resources\Customer;
 
-use Filament\Forms;
-use Filament\Tables;
-use Filament\Forms\Form;
-use App\Enums\Status;
-use Filament\Tables\Table;
-use Filament\Resources\Resource;
-use App\Models\Customer\Customer;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\Customer\CustomerResource\Pages;
 use App\Filament\Resources\Customer\CustomerResource\RelationManagers;
-use Filament\Forms\Components\Select;
-use Filament\Resources\RelationManagers\RelationGroup;
+use App\Models\Customer\Customer;
+use Filament\Forms;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Form;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
 class CustomerResource extends Resource
 {
@@ -25,7 +23,7 @@ class CustomerResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return __('app.customer');
+        return Str::lower(__('app.customer'));
     }
 
     public static function getPluralModelLabel(): string
@@ -50,7 +48,7 @@ class CustomerResource extends Resource
                                 ->label(__('app.identification'))
                                 ->required()
                                 ->maxLength(255),
-                        ])
+                        ]),
                 ]),
             );
     }

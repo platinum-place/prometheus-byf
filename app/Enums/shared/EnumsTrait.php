@@ -24,7 +24,7 @@ trait EnumsTrait
 
     public function langName(): string
     {
-        return __("app." . $this->name);
+        return __('app.'.$this->name);
     }
 
     public function getLabel(): ?string

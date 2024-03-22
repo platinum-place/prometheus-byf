@@ -2,20 +2,14 @@
 
 namespace App\Filament\Resources\Customer\CustomerResource\RelationManagers;
 
-use Filament\Forms;
-use Filament\Tables;
-use App\Enums\Status;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Filament\Forms\Components\Select;
-use Illuminate\Database\Eloquent\Model;
-use Filament\Tables\Actions\ImportAction;
-use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Imports\Customer\ContactImporter;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\Customer\ContactResource;
-use Filament\Resources\RelationManagers\RelationManager;
 use App\Filament\Imports\Customer\ContactRelationImporter;
+use App\Filament\Resources\Customer\ContactResource;
+use Filament\Forms\Form;
+use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Tables;
+use Filament\Tables\Actions\ImportAction;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class ContactsRelationManager extends RelationManager
 {
@@ -49,7 +43,7 @@ class ContactsRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
                 ImportAction::make()
                     ->importer(ContactRelationImporter::class)
-                    ->options(['customer_id' => $this->getOwnerRecord()->getKey()])
+                    ->options(['customer_id' => $this->getOwnerRecord()->getKey()]),
             ])
             ->actions(
                 \App\Filament\Actions\BaseTableActions::actions()

@@ -3,21 +3,14 @@
 namespace App\Filament\Resources\Customer;
 
 use App\Filament\Resources\Customer\ContactResource\Pages;
-use App\Filament\Resources\Customer\ContactResource\RelationManagers;
 use App\Models\Customer\Contact;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Enums\Status;
-use App\Filament\Imports\Customer\ContactImporter;
-use Filament\Forms\Components\Select;
-use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables\Actions\ImportAction;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class ContactResource extends Resource
 {
@@ -27,7 +20,7 @@ class ContactResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return __('app.contact');
+        return Str::lower(__('app.contact'));
     }
 
     public static function getPluralModelLabel(): string
@@ -48,7 +41,7 @@ class ContactResource extends Resource
             );
     }
 
-    public static function table(Table $table, bool $relation_manager = false, int $owner_id = null): Table
+    public static function table(Table $table, bool $relation_manager = false, ?int $owner_id = null): Table
     {
         return $table
             ->columns(

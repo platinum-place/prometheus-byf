@@ -2,7 +2,6 @@
 
 namespace Database\Factories\Customer;
 
-use App\Models\Customer\Contact;
 use App\Enums\Status;
 use App\Models\Customer\Customer;
 use Illuminate\Database\Eloquent\Factories\Factory;

@@ -1,11 +1,10 @@
 <?php
 
-use App\Models\Customer\Customer;
-use App\Models\Customer\Contact;
 use App\Enums\Status;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\Customer\Customer;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {

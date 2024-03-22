@@ -4,8 +4,8 @@ namespace App\Filament\Imports\Customer;
 
 use App\Enums\Status;
 use App\Models\Customer\Contact;
-use Filament\Actions\Imports\Importer;
 use Filament\Actions\Imports\ImportColumn;
+use Filament\Actions\Imports\Importer;
 use Filament\Actions\Imports\Models\Import;
 use Filament\Forms\Components\Checkbox;
 
@@ -58,7 +58,7 @@ class ContactRelationImporter extends Importer
     {
         $body = [
             'imported' => number_format($import->successful_rows),
-            'failed' => 0
+            'failed' => 0,
         ];
 
         if ($failedRowsCount = $import->getFailedRowsCount()) {

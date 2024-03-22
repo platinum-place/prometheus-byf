@@ -2,11 +2,10 @@
 
 namespace App\Filament\Schemas;
 
-use Filament\Forms;
-use Filament\Tables;
 use App\Enums\Status;
-use Filament\Forms\Components\Select;
+use Filament\Forms;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 
 class ContactForm
 {
@@ -29,7 +28,7 @@ class ContactForm
                         ->label(__('app.status'))
                         ->options(Status::class)
                         ->required(),
-                ])
+                ]),
         ]);
     }
 }
