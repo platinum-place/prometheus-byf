@@ -11,6 +11,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Section;
 
 class ContactResource extends Resource
 {
@@ -37,7 +39,16 @@ class ContactResource extends Resource
     {
         return $form
             ->schema(
-                \App\Filament\Schemas\ContactForm::form(),
+                \App\Filament\Schemas\ContactForm::form([
+                    Section::make()
+                        ->columns(2)
+                        ->schema([
+                            Select::make('customer_id')
+                                ->label(__('app.customer'))
+                                ->relationship(name: 'customer', titleAttribute: 'name')
+                                ->searchable()
+                        ]),
+                ]),
             );
     }
 
@@ -45,7 +56,13 @@ class ContactResource extends Resource
     {
         return $table
             ->columns(
-                \App\Filament\Columns\ContactColumns::columns()
+                \App\Filament\Columns\ContactColumns::columns([
+                    Tables\Columns\TextColumn::make('id')
+                        ->searchable(),
+                    Tables\Columns\TextColumn::make('customer.name')
+                        ->label(__('app.customer'))
+                        ->searchable(),
+                ])
             )
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

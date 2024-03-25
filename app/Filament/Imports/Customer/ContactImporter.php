@@ -5,12 +5,11 @@ namespace App\Filament\Imports\Customer;
 use App\Enums\Status;
 use App\Models\Customer\Contact;
 use Filament\Actions\Imports\Importer;
-use Filament\Forms\Components\Checkbox;
 use Filament\Actions\Imports\ImportColumn;
 use Filament\Actions\Imports\Models\Import;
 use App\Filament\Imports\shared\ImportTrait;
 
-class ContactRelationImporter extends Importer
+class ContactImporter extends Importer
 {
     use ImportTrait;
 
@@ -18,7 +17,10 @@ class ContactRelationImporter extends Importer
 
     public static function getColumns(): array
     {
-        return \App\Filament\Columns\ImportContactColumns::getColumns();
+        return \App\Filament\Columns\ImportContactColumns::getColumns([
+            ImportColumn::make('customer')
+                ->relationship(),
+        ]);
     }
 
     public function resolveRecord(): ?Contact
@@ -30,7 +32,6 @@ class ContactRelationImporter extends Importer
             default => new Contact(),
         };
 
-        $contact->customer_id = $this->options['customer_id'];
         $contact->status = Status::active;
 
         return $contact;

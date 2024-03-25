@@ -17,5 +17,6 @@ return [
     'contact' => 'Contacto',
     'contacts' => 'Contactos',
     'update_existing' => 'Actualizar registros existentes',
-    'import_records_alert' => 'Registros importados correctamente. :imported importados, :failed fallidos',
+    'import_records_alert' => 'Registros importados correctamente. Registros importados: :imported, fallidos: :failed',
+    'import_model' => 'Importar :model',
 ];
