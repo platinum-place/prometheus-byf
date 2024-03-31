@@ -17,10 +17,16 @@ class ContactImporter extends Importer
 
     public static function getColumns(): array
     {
-        return \App\Filament\Columns\ImportContactColumns::getColumns([
-            ImportColumn::make('customer')
-                ->relationship(),
-        ]);
+        return [
+            ImportColumn::make('name')
+                ->label(__('app.name'))
+                ->requiredMapping()
+                ->rules(['required', 'max:255']),
+            ImportColumn::make('phone')
+                ->label(__('app.phone'))
+                ->requiredMapping()
+                ->rules(['required', 'max:255']),
+        ];
     }
 
     public function resolveRecord(): ?Contact

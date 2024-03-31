@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\Actions;
+namespace App\Filament\Tables;
 
 use Filament\Tables;
 
-class BaseTableActions
+class Actions
 {
-    public static function actions($array = [])
+    public static function getActions($array = [])
     {
         return array_merge($array, [
             Tables\Actions\ViewAction::make(),

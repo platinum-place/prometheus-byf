@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
+use App\Enums\Status;
+use Filament\Forms;
 
 class ContactResource extends Resource
 {
@@ -38,32 +40,46 @@ class ContactResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema(
-                \App\Filament\Schemas\ContactForm::form([
-                    Section::make()
-                        ->columns(2)
-                        ->schema([
-                            Select::make('customer_id')
-                                ->label(__('app.customer'))
-                                ->relationship(name: 'customer', titleAttribute: 'name')
-                                ->searchable()
-                        ]),
-                ]),
-            );
+            ->schema([
+                Forms\Components\TextInput::make('name')
+                    ->label(__('app.name'))
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('phone')
+                    ->label(__('app.phone'))
+                    ->tel()
+                    ->required()
+                    ->maxLength(255),
+                Select::make('status')
+                    ->label(__('app.status'))
+                    ->options(Status::class)
+                    ->required(),
+                Select::make('customer_id')
+                    ->label(__('app.customer'))
+                    ->relationship(name: 'customer', titleAttribute: 'name')
+                    ->searchable()
+            ]);
     }
 
     public static function table(Table $table, bool $relation_manager = false, ?int $owner_id = null): Table
     {
         return $table
-            ->columns(
-                \App\Filament\Columns\ContactColumns::columns([
-                    Tables\Columns\TextColumn::make('id')
-                        ->searchable(),
-                    Tables\Columns\TextColumn::make('customer.name')
-                        ->label(__('app.customer'))
-                        ->searchable(),
-                ])
-            )
+            ->columns([
+                Tables\Columns\TextColumn::make('id')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('customer.name')
+                    ->label(__('app.customer'))
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->label(__('app.name'))
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('phone')
+                    ->label(__('app.phone'))
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->label(__('app.status')),
+            ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
@@ -71,11 +87,11 @@ class ContactResource extends Resource
                 //
             ])
             ->actions(
-                \App\Filament\Actions\BaseTableActions::actions()
+                \App\Filament\Tables\Actions::getActions()
             )
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make(
-                    \App\Filament\Actions\BaseTableActions::bulkActions()
+                    \App\Filament\Tables\Actions::bulkActions()
                 ),
             ]);
     }

@@ -2,14 +2,18 @@
 
 namespace App\Filament\Resources\Customer\CustomerResource\RelationManagers;
 
-use App\Filament\Imports\Customer\ContactRelationImporter;
-use App\Filament\Resources\Customer\ContactResource;
-use Filament\Forms\Form;
-use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Forms;
 use Filament\Tables;
-use Filament\Tables\Actions\ImportAction;
+use App\Enums\Status;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Forms\Components\Select;
 use Illuminate\Database\Eloquent\Model;
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Actions\ImportAction;
+use App\Filament\Resources\Customer\ContactResource;
+use Filament\Resources\RelationManagers\RelationManager;
+use App\Filament\Imports\Customer\ContactRelationImporter;
 
 class ContactsRelationManager extends RelationManager
 {
@@ -27,15 +31,38 @@ class ContactsRelationManager extends RelationManager
 
     public function form(Form $form): Form
     {
-        return ContactResource::form($form);
+        return $form
+            ->schema([
+                Forms\Components\TextInput::make('name')
+                    ->label(__('app.name'))
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('phone')
+                    ->label(__('app.phone'))
+                    ->tel()
+                    ->required()
+                    ->maxLength(255),
+                Select::make('status')
+                    ->label(__('app.status'))
+                    ->options(Status::class)
+                    ->required(),
+            ]);
     }
 
     public function table(Table $table): Table
     {
         return $table
-            ->columns(
-                \App\Filament\Columns\ContactColumns::columns()
-            )
+            ->columns([
+                Tables\Columns\TextColumn::make('name')
+                    ->label(__('app.name'))
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('phone')
+                    ->label(__('app.phone'))
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->label(__('app.status')),
+            ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
@@ -46,11 +73,11 @@ class ContactsRelationManager extends RelationManager
                     ->options(['customer_id' => $this->getOwnerRecord()->getKey()]),
             ])
             ->actions(
-                \App\Filament\Actions\BaseTableActions::actions()
+                \App\Filament\Tables\Actions::getActions()
             )
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make(
-                    \App\Filament\Actions\BaseTableActions::bulkActions()
+                    \App\Filament\Tables\Actions::bulkActions()
                 ),
             ]);
     }

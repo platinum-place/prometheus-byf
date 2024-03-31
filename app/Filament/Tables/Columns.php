@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\Columns;
+namespace App\Filament\Tables;
 
 use Filament\Tables;
 
-class DateAtColumns
+class Columns
 {
-    public static function columns($array = [])
+    public static function getDateColumns($array = [])
     {
         return array_merge($array, [
             Tables\Columns\TextColumn::make('created_at')
