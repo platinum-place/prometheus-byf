@@ -3,8 +3,6 @@
 declare(strict_types=1);
 
 return [
-    'active' => 'Activo',
-    'inactive' => 'Inactivo',
     'customer' => 'Cliente',
     'customers' => 'Clientes',
     'name' => 'Nombre',

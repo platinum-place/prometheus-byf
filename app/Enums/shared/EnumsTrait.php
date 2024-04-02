@@ -6,29 +6,21 @@ use Illuminate\Support\Arr;
 
 trait EnumsTrait
 {
-    /**
-     * Returns all the values of an enum.
-     */
     public static function values()
     {
         return Arr::pluck(static::cases(), 'value');
     }
 
-    /**
-     * Returns all the names of an enum.
-     */
     public static function names(): array
     {
         return Arr::pluck(static::cases(), 'name');
     }
 
+    /**
+     * All translates are in lang/(es,en,etc)/enums.php
+     */
     public function langName(): string
     {
-        return __('app.'.$this->name);
-    }
-
-    public function getLabel(): ?string
-    {
-        return $this->langName();
+        return __('enums.' . $this->name);
     }
 }

@@ -3,12 +3,13 @@
 namespace App\Enums;
 
 use App\Enums\shared\EnumsTrait;
+use App\Enums\shared\FilamentEnumsTrait;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 
 enum Status: int implements HasColor, HasLabel
 {
-    use EnumsTrait;
+    use EnumsTrait, FilamentEnumsTrait;
 
     case active = 1;
 
