@@ -20,7 +20,8 @@ return new class extends Migration
             $table->foreignIdFor(Customer::class)->nullable()->constrained();
             $table->enum('status', Status::values());
             $table->string('name');
-            $table->string('phone');
+            $table->string('identification')->unique()->nullable();
+            $table->string('phone')->nullable();
         });
     }
 
