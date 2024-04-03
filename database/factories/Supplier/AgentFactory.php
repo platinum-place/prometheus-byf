@@ -1,15 +1,13 @@
 <?php
 
-namespace Database\Factories\Customer;
+namespace Database\Factories\Supplier;
 
-use App\Enums\Status;
-use App\Models\Customer\Customer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Customer\Contact>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Supplier\Agent>
  */
-class ContactFactory extends Factory
+class AgentFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,7 +17,6 @@ class ContactFactory extends Factory
     public function definition(): array
     {
         return [
-            'customer_id' => Customer::factory(),
             'name' => $this->faker->name,
             'phone' => $this->faker->phoneNumber,
         ];

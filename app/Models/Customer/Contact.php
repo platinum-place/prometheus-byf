@@ -12,18 +12,6 @@ class Contact extends Model
 {
     use HasFactory, SoftDeletes;
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'status' => Status::class,
-        ];
-    }
-
     public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);

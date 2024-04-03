@@ -19,7 +19,6 @@ class SupplierFactory extends Factory
         return [
             'name' => $this->faker->name,
             'phone' => $this->faker->phoneNumber,
-            'identification' => $this->faker->text(50),
         ];
     }
 }

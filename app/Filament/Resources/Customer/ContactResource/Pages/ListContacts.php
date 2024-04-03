@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Customer\ContactResource\Pages;
 
 use Filament\Actions;
-use Illuminate\Support\Str;
 use Filament\Actions\ImportAction;
 use Filament\Resources\Pages\ListRecords;
 use App\Filament\Imports\Customer\ContactImporter;
@@ -18,7 +17,7 @@ class ListContacts extends ListRecords
         return [
             Actions\CreateAction::make(),
             ImportAction::make()
-                ->label(__('app.import_model', ['model' => Str::lower(__('app.contact'))]))
+                ->label(__('app.import_model', ['model' => __('app.contacts')]))
                 ->importer(ContactImporter::class),
         ];
     }

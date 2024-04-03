@@ -2,19 +2,17 @@
 
 namespace App\Filament\Resources\Customer;
 
-use App\Filament\Resources\Customer\ContactResource\Pages;
-use App\Models\Customer\Contact;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use Filament\Forms;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
+use App\Models\Customer\Contact;
+use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Str;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Section;
-use App\Enums\Status;
-use Filament\Forms;
+use App\Filament\Resources\Customer\ContactResource\Pages;
+use App\Filament\Resources\Customer\ContactResource\RelationManagers;
 
 class ContactResource extends Resource
 {
@@ -41,57 +39,41 @@ class ContactResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('customer_id')
+                    ->label(__('app.customer'))
+                    ->searchable()
+                    ->relationship('customer', 'name'),
                 Forms\Components\TextInput::make('name')
                     ->label(__('app.name'))
-                    ->required()
-                    ->maxLength(255),
+                    ->required(),
                 Forms\Components\TextInput::make('phone')
                     ->label(__('app.phone'))
-                    ->tel()
-                    ->required()
-                    ->maxLength(255),
-                Select::make('status')
-                    ->label(__('app.status'))
-                    ->options(Status::class)
-                    ->required(),
-                Select::make('customer_id')
-                    ->label(__('app.customer'))
-                    ->relationship(name: 'customer', titleAttribute: 'name')
-                    ->searchable()
+                    ->tel(),
             ]);
     }
 
-    public static function table(Table $table, bool $relation_manager = false, ?int $owner_id = null): Table
+    public static function table(Table $table): Table
     {
         return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('customer.name')
-                    ->label(__('app.customer'))
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('name')
-                    ->label(__('app.name'))
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('phone')
-                    ->label(__('app.phone'))
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('status')
-                    ->badge()
-                    ->label(__('app.status')),
-            ])
+            ->columns(
+                \App\Filament\Tables\Components\TableColumns::getDateColumns([
+                    Tables\Columns\TextColumn::make('name')
+                        ->label(__('app.name'))
+                        ->searchable(),
+                    Tables\Columns\TextColumn::make('customer.name')
+                        ->label(__('app.customer'))
+                        ->sortable(),
+                ])
+            )
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
-            ->headerActions([
-                //
-            ])
             ->actions(
-                \App\Filament\Tables\Actions::getActions()
+                \App\Filament\Tables\Components\TableActions::getActions()
             )
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make(
-                    \App\Filament\Tables\Actions::bulkActions()
+                    \App\Filament\Tables\Components\TableActions::bulkActions()
                 ),
             ]);
     }

@@ -18,7 +18,6 @@ class CustomerFactory extends Factory
     public function definition(): array
     {
         return [
-            'status' => $this->faker->randomElement(Status::values()),
             'name' => $this->faker->name,
             'phone' => $this->faker->phoneNumber,
             'identification' => $this->faker->text(50),

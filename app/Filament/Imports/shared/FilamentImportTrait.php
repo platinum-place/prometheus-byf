@@ -5,7 +5,7 @@ namespace App\Filament\Imports\shared;
 use Filament\Actions\Imports\Models\Import;
 use Filament\Forms\Components\Checkbox;
 
-trait ImportTrait
+trait FilamentImportTrait
 {
     public static function getCompletedNotificationBody(Import $import): string
     {

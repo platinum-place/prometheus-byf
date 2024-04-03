@@ -16,7 +16,6 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->softDeletes();
-            $table->enum('status', Status::values());
             $table->string('name');
             $table->string('identification')->unique()->nullable();
             $table->string('phone')->nullable();

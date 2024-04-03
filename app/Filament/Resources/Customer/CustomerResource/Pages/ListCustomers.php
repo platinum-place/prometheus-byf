@@ -18,7 +18,7 @@ class ListCustomers extends ListRecords
         return [
             Actions\CreateAction::make(),
             ImportAction::make()
-                ->label(__('app.import_model', ['model' => Str::lower(__('app.customer'))]))
+                ->label(__('app.import_model', ['model' => __('app.customers')]))
                 ->importer(CustomerImporter::class),
         ];
     }

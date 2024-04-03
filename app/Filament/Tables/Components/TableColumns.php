@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Filament\Tables;
+namespace App\Filament\Tables\Components;
 
 use Filament\Tables;
 
-class Columns
+class TableColumns
 {
     public static function getDateColumns($array = [])
     {

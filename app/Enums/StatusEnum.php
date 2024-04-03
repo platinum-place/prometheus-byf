@@ -7,7 +7,7 @@ use App\Enums\shared\FilamentEnumsTrait;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 
-enum Status: int implements HasColor, HasLabel
+enum StatusEnum: int implements HasColor, HasLabel
 {
     use EnumsTrait, FilamentEnumsTrait;
 

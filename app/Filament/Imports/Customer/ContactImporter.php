@@ -2,44 +2,40 @@
 
 namespace App\Filament\Imports\Customer;
 
-use App\Enums\Status;
 use App\Models\Customer\Contact;
 use Filament\Actions\Imports\Importer;
 use Filament\Actions\Imports\ImportColumn;
 use Filament\Actions\Imports\Models\Import;
-use App\Filament\Imports\shared\ImportTrait;
+use App\Filament\Imports\shared\FilamentImportTrait;
 
 class ContactImporter extends Importer
 {
-    use ImportTrait;
+    use FilamentImportTrait;
 
     protected static ?string $model = Contact::class;
 
     public static function getColumns(): array
     {
         return [
+            ImportColumn::make('customer')
+                ->label(__('app.customer'))
+                ->relationship(),
             ImportColumn::make('name')
                 ->label(__('app.name'))
                 ->requiredMapping()
-                ->rules(['required', 'max:255']),
+                ->rules(['required']),
             ImportColumn::make('phone')
-                ->label(__('app.phone'))
-                ->requiredMapping()
-                ->rules(['required', 'max:255']),
+                ->label(__('app.phone')),
         ];
     }
 
     public function resolveRecord(): ?Contact
     {
-        $contact = match (!empty($this->options['update_existing'])) {
-            true => Contact::firstOrNew([
-                'name' => $this->data['name'],
-            ]),
-            default => new Contact(),
-        };
+        // return Contact::firstOrNew([
+        //     // Update existing records, matching them by `$this->data['column_name']`
+        //     'email' => $this->data['email'],
+        // ]);
 
-        $contact->status = Status::active;
-
-        return $contact;
+        return new Contact();
     }
 }
