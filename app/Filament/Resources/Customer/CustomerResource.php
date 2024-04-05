@@ -22,7 +22,7 @@ class CustomerResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return Str::lower(__('app.customer'));
+        return __('app.customer');
     }
 
     public static function getPluralModelLabel(): string

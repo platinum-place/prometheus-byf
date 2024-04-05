@@ -12,12 +12,28 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    public static function getModelLabel(): string
+    {
+        return __('app.product');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('app.products');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('app.suppliers');
+    }
 
     public static function form(Form $form): Form
     {

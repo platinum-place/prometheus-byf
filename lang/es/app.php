@@ -19,4 +19,10 @@ return [
     'import_model' => 'Importar :model',
     'price' => 'Precio',
     'type' => 'Tipo',
+    'agent' => 'Agente',
+    'agents' => 'Agentes',
+    'product' => 'Producto',
+    'products' => 'Productos',
+    'supplier' => 'Suplidor',
+    'suppliers' => 'Suplidores',
 ];
