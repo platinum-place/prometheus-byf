@@ -19,4 +19,6 @@ return [
     'import_model' => 'Importar :model',
     'price' => 'Precio',
     'type' => 'Tipo',
+    'export_model' => 'Exportar :model',
+    'export_records_alert' => 'Registros exportados correctamente. Registros exportados: :exported, fallidos: :failed',
 ];

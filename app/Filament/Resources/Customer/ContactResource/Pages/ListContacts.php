@@ -16,9 +16,6 @@ class ListContacts extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
-            ImportAction::make()
-                ->label(__('app.import_model', ['model' => __('app.contacts')]))
-                ->importer(ContactImporter::class),
         ];
     }
 }
