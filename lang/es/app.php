@@ -21,4 +21,10 @@ return [
     'type' => 'Tipo',
     'export_model' => 'Exportar :model',
     'export_records_alert' => 'Registros exportados correctamente. Registros exportados: :exported, fallidos: :failed',
+    'agent' => 'Agente',
+    'agents' => 'Agentes',
+    'product' => 'Producto',
+    'products' => 'Productos',
+    'supplier' => 'Suplidor',
+    'suppliers' => 'Suplidores',
 ];

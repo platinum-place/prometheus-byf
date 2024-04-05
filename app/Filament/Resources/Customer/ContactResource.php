@@ -22,7 +22,7 @@ class ContactResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return Str::lower(__('app.contact'));
+        return __('app.contact');
     }
 
     public static function getPluralModelLabel(): string
