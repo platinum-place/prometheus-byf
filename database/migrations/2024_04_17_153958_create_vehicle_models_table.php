@@ -1,7 +1,6 @@
 <?php
 
-use App\Enums\Status;
-use App\Models\Customer\Customer;
+use App\Models\Vehicle\VehicleMake;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,13 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contacts', function (Blueprint $table) {
+        Schema::create('vehicle_models', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreignIdFor(Customer::class)->nullable()->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->string('phone')->nullable();
+            $table->foreignIdFor(VehicleMake::class)->constrained()->cascadeOnDelete();
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contacts');
+        Schema::dropIfExists('vehicle_models');
     }
 };

@@ -7,9 +7,11 @@ use App\Enums\shared\FilamentEnumsTrait;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 
-enum ProductTypeEnum: int implements HasLabel
+enum VehicleTypeEnum: int implements HasLabel
 {
     use EnumsTrait, FilamentEnumsTrait;
-    
-    case service = 1;
+
+    case light = 1;
+
+    case heavy = 1;
 }

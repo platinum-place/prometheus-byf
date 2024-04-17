@@ -19,12 +19,12 @@ class ListCustomers extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
-            ImportAction::make()
-                ->label(__('app.import_model', ['model' => __('app.customers')]))
-                ->importer(CustomerImporter::class),
-            ExportAction::make()
-                ->label(__('app.export_model', ['model' => __('app.customers')]))
-                ->exporter(CustomerExporter::class)
+            // ImportAction::make()
+            //     ->label(__('app.import_model', ['model' => __('app.customers')]))
+            //     ->importer(CustomerImporter::class),
+            // ExportAction::make()
+            //     ->label(__('app.export_model', ['model' => __('app.customers')]))
+            //     ->exporter(CustomerExporter::class)
         ];
     }
 }

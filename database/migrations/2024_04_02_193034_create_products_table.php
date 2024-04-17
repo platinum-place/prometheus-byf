@@ -19,7 +19,7 @@ return new class extends Migration
             $table->softDeletes();
             $table->string('name');
             $table->decimal('price');
-            $table->foreignIdFor(Supplier::class)->constrained();
+            $table->foreignIdFor(Supplier::class)->constrained()->cascadeOnDelete();
             $table->enum('type', ProductTypeEnum::values());
         });
     }

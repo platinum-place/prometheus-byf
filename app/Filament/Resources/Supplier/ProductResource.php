@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Supplier;
 
+use App\Enums\Supplier\ProductTypeEnum;
 use App\Filament\Resources\Supplier\ProductResource\Pages;
 use App\Filament\Resources\Supplier\ProductResource\RelationManagers;
 use App\Models\Supplier\Product;
@@ -13,6 +14,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
+use Filament\Forms\Components\Select;
 
 class ProductResource extends Resource
 {
@@ -40,15 +42,20 @@ class ProductResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label(__('app.name'))
                     ->required(),
                 Forms\Components\TextInput::make('price')
+                    ->label(__('app.price'))
                     ->required()
                     ->numeric()
                     ->prefix('$'),
                 Forms\Components\Select::make('supplier_id')
+                    ->label(__('app.supplier'))
                     ->relationship('supplier', 'name')
                     ->required(),
-                Forms\Components\TextInput::make('type')
+                Select::make('type')
+                    ->label(__('app.type'))
+                    ->options(ProductTypeEnum::class)
                     ->required(),
             ]);
     }
@@ -56,43 +63,34 @@ class ProductResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('price')
-                    ->money()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('supplier.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('type')
-                    ->searchable(),
-            ])
+            ->columns(
+                \App\Filament\Tables\Components\TableColumns::getDateColumns([
+                    Tables\Columns\TextColumn::make('name')
+                        ->label(__('app.name'))
+                        ->searchable(),
+                    Tables\Columns\TextColumn::make('price')
+                        ->label(__('app.price'))
+                        ->money()
+                        ->sortable(),
+                    Tables\Columns\TextColumn::make('supplier.name')
+                        ->label(__('app.supplier'))
+                        ->numeric()
+                        ->sortable(),
+                    Tables\Columns\TextColumn::make('type')
+                        ->label(__('app.type'))
+                        ->searchable(),
+                ])
+            )
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
-            ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-            ])
+            ->actions(
+                \App\Filament\Tables\Components\TableActions::getActions()
+            )
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\ForceDeleteBulkAction::make(),
-                    Tables\Actions\RestoreBulkAction::make(),
-                ]),
+                Tables\Actions\BulkActionGroup::make(
+                    \App\Filament\Tables\Components\TableActions::bulkActions()
+                ),
             ]);
     }
 

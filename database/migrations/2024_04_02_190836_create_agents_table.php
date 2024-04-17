@@ -18,7 +18,7 @@ return new class extends Migration
             $table->softDeletes();
             $table->string('name');
             $table->string('phone')->nullable();
-            $table->foreignIdFor(Supplier::class)->constrained();
+            $table->foreignIdFor(Supplier::class)->constrained()->cascadeOnDelete();
         });
     }
 
