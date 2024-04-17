@@ -7,4 +7,6 @@ return [
     'inactive' => 'Inactivo',
     'storagable' => 'Almacenable',
     'service' => 'Servicio',
+    'lightVehicle' => 'Vehículo ligero',
+    'heavyVehicle' => 'Vehículo pesado',
 ];

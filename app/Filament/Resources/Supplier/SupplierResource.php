@@ -2,17 +2,16 @@
 
 namespace App\Filament\Resources\Supplier;
 
-use Filament\Forms;
-use Filament\Tables;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Illuminate\Support\Str;
-use Filament\Resources\Resource;
-use App\Models\Supplier\Supplier;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\Supplier\SupplierResource\Pages;
 use App\Filament\Resources\Supplier\SupplierResource\RelationManagers;
+use App\Models\Supplier\Supplier;
+use Filament\Forms;
+use Filament\Forms\Form;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SupplierResource extends Resource
 {
@@ -77,6 +76,7 @@ class SupplierResource extends Resource
     public static function getRelations(): array
     {
         return [
+            RelationManagers\AgentsRelationManager::class,
             RelationManagers\ProductsRelationManager::class,
         ];
     }

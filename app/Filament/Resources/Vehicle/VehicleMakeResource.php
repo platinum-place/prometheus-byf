@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Filament\Resources\Supplier;
+namespace App\Filament\Resources\Vehicle;
 
-use App\Filament\Resources\Supplier\AgentResource\Pages;
-use App\Models\Supplier\Agent;
+use App\Filament\Resources\Vehicle\VehicleMakeResource\Pages;
+use App\Filament\Resources\Vehicle\VehicleMakeResource\RelationManagers;
+use App\Models\Vehicle\VehicleMake;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,25 +13,25 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class AgentResource extends Resource
+class VehicleMakeResource extends Resource
 {
-    protected static ?string $model = Agent::class;
+    protected static ?string $model = VehicleMake::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function getModelLabel(): string
     {
-        return __('app.agent');
+        return __('app.make');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('app.agents');
+        return __('app.makes');
     }
 
     public static function getNavigationGroup(): ?string
     {
-        return __('app.suppliers');
+        return __('app.vehicles');
     }
 
     public static function form(Form $form): Form
@@ -39,15 +40,6 @@ class AgentResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->label(__('app.name'))
-                    ->required(),
-                Forms\Components\TextInput::make('phone')
-                    ->label(__('app.phone'))
-                    ->tel(),
-                Forms\Components\Select::make('supplier_id')
-                    ->label(__('app.supplier'))
-                    ->relationship('supplier', 'name')
-                    ->searchable()
-                    ->preload()
                     ->required(),
             ]);
     }
@@ -58,14 +50,7 @@ class AgentResource extends Resource
             ->columns(
                 \App\Filament\Tables\Components\TableColumns::getDateColumns([
                     Tables\Columns\TextColumn::make('name')
-                        ->label(__('app.name'))
                         ->searchable(),
-                    Tables\Columns\TextColumn::make('phone')
-                        ->label(__('app.phone'))
-                        ->searchable(),
-                    Tables\Columns\TextColumn::make('supplier.name')
-                        ->label(__('app.supplier'))
-                        ->sortable(),
                 ])
             )
             ->filters([
@@ -84,17 +69,17 @@ class AgentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\VehicleModelsRelationManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListAgents::route('/'),
-            'create' => Pages\CreateAgent::route('/create'),
-            'view' => Pages\ViewAgent::route('/{record}'),
-            'edit' => Pages\EditAgent::route('/{record}/edit'),
+            'index' => Pages\ListVehicleMakes::route('/'),
+            'create' => Pages\CreateVehicleMake::route('/create'),
+            'view' => Pages\ViewVehicleMake::route('/{record}'),
+            'edit' => Pages\EditVehicleMake::route('/{record}/edit'),
         ];
     }
 

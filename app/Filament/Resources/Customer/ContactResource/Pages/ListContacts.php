@@ -2,11 +2,9 @@
 
 namespace App\Filament\Resources\Customer\ContactResource\Pages;
 
-use Filament\Actions;
-use Filament\Actions\ImportAction;
-use Filament\Resources\Pages\ListRecords;
-use App\Filament\Imports\Customer\ContactImporter;
 use App\Filament\Resources\Customer\ContactResource;
+use Filament\Actions;
+use Filament\Resources\Pages\ListRecords;
 
 class ListContacts extends ListRecords
 {

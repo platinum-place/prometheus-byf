@@ -2,9 +2,7 @@
 
 namespace App\Filament\Resources\Supplier\SupplierResource\RelationManagers;
 
-use App\Enums\Supplier\ProductTypeEnum;
 use Filament\Forms;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -13,18 +11,18 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ProductsRelationManager extends RelationManager
+class AgentsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'products';
+    protected static string $relationship = 'agents';
 
     public static function getModelLabel(): string
     {
-        return __('app.product');
+        return __('app.agent');
     }
 
     public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
-        return __('app.products');
+        return __('app.agents');
     }
 
     public function form(Form $form): Form
@@ -32,17 +30,11 @@ class ProductsRelationManager extends RelationManager
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->label(__('app.name'))
-                    ->required(),
-                Forms\Components\TextInput::make('price')
-                    ->label(__('app.price'))
                     ->required()
-                    ->numeric()
-                    ->prefix('$'),
-                Select::make('type')
-                    ->label(__('app.type'))
-                    ->options(ProductTypeEnum::class)
-                    ->required(),
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('phone')
+                    ->label(__('app.phone'))
+                    ->tel(),
             ]);
     }
 
@@ -53,15 +45,9 @@ class ProductsRelationManager extends RelationManager
             ->columns(
                 \App\Filament\Tables\Components\TableColumns::getDateColumns([
                     Tables\Columns\TextColumn::make('name')
-                        ->label(__('app.name'))
-                        ->searchable(),
-                    Tables\Columns\TextColumn::make('price')
-                        ->label(__('app.price'))
-                        ->money()
-                        ->sortable(),
-                    Tables\Columns\TextColumn::make('type')
-                        ->label(__('app.type'))
-                        ->searchable(),
+                        ->label(__('app.name')),
+                    Tables\Columns\TextColumn::make('phone')
+                        ->label(__('app.phone')),
                 ])
             )
             ->filters([

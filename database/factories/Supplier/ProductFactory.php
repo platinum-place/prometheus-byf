@@ -2,8 +2,8 @@
 
 namespace Database\Factories\Supplier;
 
-use App\Models\Supplier\Supplier;
 use App\Enums\Supplier\ProductTypeEnum;
+use App\Models\Supplier\Supplier;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

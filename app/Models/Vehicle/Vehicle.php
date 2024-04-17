@@ -2,11 +2,11 @@
 
 namespace App\Models\Vehicle;
 
-use App\Enums\Supplier\VehicleTypeEnum;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Enums\Vehicle\VehicleTypeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Vehicle extends Model
 {
@@ -24,8 +24,13 @@ class Vehicle extends Model
         ];
     }
 
-    public function make(): BelongsTo
+    public function vehicleMake(): BelongsTo
     {
         return $this->belongsTo(VehicleMake::class);
+    }
+
+    public function vehicleModel(): BelongsTo
+    {
+        return $this->belongsTo(VehicleModel::class);
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Filament\Resources\Supplier;
+namespace App\Filament\Resources\Vehicle;
 
-use App\Filament\Resources\Supplier\AgentResource\Pages;
-use App\Models\Supplier\Agent;
+use App\Filament\Resources\Vehicle\VehicleModelResource\Pages;
+use App\Models\Vehicle\VehicleModel;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,42 +12,39 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class AgentResource extends Resource
+class VehicleModelResource extends Resource
 {
-    protected static ?string $model = Agent::class;
+    protected static ?string $model = VehicleModel::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function getModelLabel(): string
     {
-        return __('app.agent');
+        return __('app.model');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('app.agents');
+        return __('app.models');
     }
 
     public static function getNavigationGroup(): ?string
     {
-        return __('app.suppliers');
+        return __('app.vehicles');
     }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label(__('app.name'))
-                    ->required(),
-                Forms\Components\TextInput::make('phone')
-                    ->label(__('app.phone'))
-                    ->tel(),
-                Forms\Components\Select::make('supplier_id')
-                    ->label(__('app.supplier'))
-                    ->relationship('supplier', 'name')
+                Forms\Components\Select::make('vehicle_make_id')
+                    ->label(__('app.vehicle'))
+                    ->relationship('vehicleMake', 'name')
                     ->searchable()
                     ->preload()
+                    ->required(),
+                Forms\Components\TextInput::make('name')
+                    ->label(__('app.name'))
                     ->required(),
             ]);
     }
@@ -60,11 +57,8 @@ class AgentResource extends Resource
                     Tables\Columns\TextColumn::make('name')
                         ->label(__('app.name'))
                         ->searchable(),
-                    Tables\Columns\TextColumn::make('phone')
-                        ->label(__('app.phone'))
-                        ->searchable(),
-                    Tables\Columns\TextColumn::make('supplier.name')
-                        ->label(__('app.supplier'))
+                    Tables\Columns\TextColumn::make('vehicleMake.name')
+                        ->label(__('app.make'))
                         ->sortable(),
                 ])
             )
@@ -91,10 +85,10 @@ class AgentResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListAgents::route('/'),
-            'create' => Pages\CreateAgent::route('/create'),
-            'view' => Pages\ViewAgent::route('/{record}'),
-            'edit' => Pages\EditAgent::route('/{record}/edit'),
+            'index' => Pages\ListVehicleModels::route('/'),
+            'create' => Pages\CreateVehicleModel::route('/create'),
+            'view' => Pages\ViewVehicleModel::route('/{record}'),
+            'edit' => Pages\EditVehicleModel::route('/{record}/edit'),
         ];
     }
 

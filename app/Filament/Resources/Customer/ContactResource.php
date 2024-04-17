@@ -2,17 +2,15 @@
 
 namespace App\Filament\Resources\Customer;
 
-use Filament\Forms;
-use Filament\Tables;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Illuminate\Support\Str;
+use App\Filament\Resources\Customer\ContactResource\Pages;
 use App\Models\Customer\Contact;
+use Filament\Forms;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\Customer\ContactResource\Pages;
-use App\Filament\Resources\Customer\ContactResource\RelationManagers;
 
 class ContactResource extends Resource
 {
@@ -42,7 +40,9 @@ class ContactResource extends Resource
                 Forms\Components\Select::make('customer_id')
                     ->label(__('app.customer'))
                     ->searchable()
-                    ->relationship('customer', 'name'),
+                    ->relationship('customer', 'name')
+                    ->searchable()
+                    ->preload(),
                 Forms\Components\TextInput::make('name')
                     ->label(__('app.name'))
                     ->required(),

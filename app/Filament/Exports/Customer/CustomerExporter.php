@@ -6,7 +6,6 @@ use App\Filament\Exports\shared\FilamentExportTrait;
 use App\Models\Customer\Customer;
 use Filament\Actions\Exports\ExportColumn;
 use Filament\Actions\Exports\Exporter;
-use Filament\Actions\Exports\Models\Export;
 
 class CustomerExporter extends Exporter
 {

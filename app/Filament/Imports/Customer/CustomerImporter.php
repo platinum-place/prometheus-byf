@@ -2,12 +2,10 @@
 
 namespace App\Filament\Imports\Customer;
 
-use App\Enums\Status;
-use App\Models\Customer\Customer;
-use Filament\Actions\Imports\Importer;
-use Filament\Actions\Imports\ImportColumn;
-use Filament\Actions\Imports\Models\Import;
 use App\Filament\Imports\shared\FilamentImportTrait;
+use App\Models\Customer\Customer;
+use Filament\Actions\Imports\ImportColumn;
+use Filament\Actions\Imports\Importer;
 
 class CustomerImporter extends Importer
 {
@@ -35,7 +33,7 @@ class CustomerImporter extends Importer
 
     public function resolveRecord(): ?Customer
     {
-        return match (!empty($this->options['update_existing'])) {
+        return match (! empty($this->options['update_existing'])) {
             true => Customer::firstOrNew([
                 'identification' => $this->data['identification'],
             ]),

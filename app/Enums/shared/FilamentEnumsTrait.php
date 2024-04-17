@@ -2,8 +2,6 @@
 
 namespace App\Enums\shared;
 
-use Illuminate\Support\Arr;
-
 trait FilamentEnumsTrait
 {
     public function getLabel(): ?string

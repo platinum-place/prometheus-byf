@@ -21,6 +21,6 @@ trait EnumsTrait
      */
     public function langName(): string
     {
-        return __('enums.' . $this->name);
+        return __('enums.'.$this->name);
     }
 }

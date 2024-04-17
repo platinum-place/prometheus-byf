@@ -4,17 +4,15 @@ namespace App\Filament\Resources\Supplier;
 
 use App\Enums\Supplier\ProductTypeEnum;
 use App\Filament\Resources\Supplier\ProductResource\Pages;
-use App\Filament\Resources\Supplier\ProductResource\RelationManagers;
 use App\Models\Supplier\Product;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Str;
-use Filament\Forms\Components\Select;
 
 class ProductResource extends Resource
 {
@@ -52,6 +50,8 @@ class ProductResource extends Resource
                 Forms\Components\Select::make('supplier_id')
                     ->label(__('app.supplier'))
                     ->relationship('supplier', 'name')
+                    ->searchable()
+                    ->preload()
                     ->required(),
                 Select::make('type')
                     ->label(__('app.type'))
@@ -74,7 +74,6 @@ class ProductResource extends Resource
                         ->sortable(),
                     Tables\Columns\TextColumn::make('supplier.name')
                         ->label(__('app.supplier'))
-                        ->numeric()
                         ->sortable(),
                     Tables\Columns\TextColumn::make('type')
                         ->label(__('app.type'))

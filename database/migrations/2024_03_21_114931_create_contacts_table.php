@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\Status;
 use App\Models\Customer\Customer;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
