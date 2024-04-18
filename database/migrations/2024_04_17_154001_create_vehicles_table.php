@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('identification')->nullable()->unique();
             $table->string('plate')->nullable();
             $table->integer('year')->nullable();
-            $table->string('chassis')->nullable()->unique();
+            $table->string('chassis')->unique();
             $table->foreignIdFor(VehicleMake::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(VehicleModel::class)->constrained()->cascadeOnDelete();
             $table->enum('type', VehicleTypeEnum::values());

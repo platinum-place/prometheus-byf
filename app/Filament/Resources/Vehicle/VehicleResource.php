@@ -47,7 +47,8 @@ class VehicleResource extends Resource
                     ->relationship('vehicleMake', 'name')
                     ->searchable()
                     ->preload()
-                    ->live(),
+                    ->live()
+                    ->required(),
                 Forms\Components\Select::make('vehicle_model_id')
                     ->label(__('app.model'))
                     ->relationship(
@@ -60,7 +61,8 @@ class VehicleResource extends Resource
                     ->live()
                     ->required(),
                 Forms\Components\TextInput::make('chassis')
-                    ->label(__('app.chassis')),
+                    ->label(__('app.chassis'))
+                    ->required(),
                 Forms\Components\TextInput::make('color')
                     ->label(__('app.color')),
                 Forms\Components\TextInput::make('identification')

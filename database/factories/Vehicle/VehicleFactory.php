@@ -20,11 +20,11 @@ class VehicleFactory extends Factory
     public function definition(): array
     {
         return [
-            'color' => $this->faker->name,
-            'identification' => $this->faker->name,
-            'plate' => $this->faker->name,
+            'color' => $this->faker->text(),
+            'identification' => $this->faker->text(),
+            'plate' => $this->faker->text(),
             'year' => $this->faker->randomNumber(),
-            'chassis' => $this->faker->name,
+            'chassis' => $this->faker->text(),
             'type' => $this->faker->randomElement(VehicleTypeEnum::values()),
             'vehicle_model_id' => VehicleModel::factory(),
             'vehicle_make_id' => VehicleMake::factory(),

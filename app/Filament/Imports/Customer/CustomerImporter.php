@@ -4,6 +4,7 @@ namespace App\Filament\Imports\Customer;
 
 use App\Filament\Imports\shared\FilamentImportTrait;
 use App\Models\Customer\Customer;
+use App\Models\User;
 use Filament\Actions\Imports\ImportColumn;
 use Filament\Actions\Imports\Importer;
 
