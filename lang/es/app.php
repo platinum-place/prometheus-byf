@@ -57,4 +57,7 @@ return [
     'note' => 'Nota',
     'sale' => 'Venta',
     'sales' => 'Ventas',
+    'draft' => 'Borrador',
+    'issued' => 'Emitida',
+    'partialPaid' => 'Parcialmente pagada',
 ];
