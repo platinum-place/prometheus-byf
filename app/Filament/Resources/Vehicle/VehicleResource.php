@@ -2,20 +2,15 @@
 
 namespace App\Filament\Resources\Vehicle;
 
-use App\Enums\Vehicle\VehicleTypeEnum;
+use App\Filament\Forms\Components\Vehicle\VehicleFormComponent;
 use App\Filament\Resources\Vehicle\VehicleResource\Pages;
 use App\Models\Vehicle\Vehicle;
-use App\Models\Vehicle\VehicleModel;
-use Filament\Forms;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Get;
-use Illuminate\Support\Collection;
 
 class VehicleResource extends Resource
 {
@@ -41,49 +36,16 @@ class VehicleResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\Select::make('vehicle_make_id')
-                    ->label(__('app.make'))
-                    ->relationship('vehicleMake', 'name')
-                    ->searchable()
-                    ->preload()
-                    ->live()
-                    ->required(),
-                Forms\Components\Select::make('vehicle_model_id')
-                    ->label(__('app.model'))
-                    ->relationship(
-                        'vehicleModel',
-                        'name',
-                        fn (Builder $query, Get $get) => $query->where('vehicle_make_id', $get('vehicle_make_id'))
-                    )
-                    ->searchable()
-                    ->preload()
-                    ->live()
-                    ->required(),
-                Forms\Components\TextInput::make('chassis')
-                    ->label(__('app.chassis'))
-                    ->required(),
-                Forms\Components\TextInput::make('color')
-                    ->label(__('app.color')),
-                Forms\Components\TextInput::make('identification')
-                    ->label(__('app.identification')),
-                Forms\Components\TextInput::make('plate')
-                    ->label(__('app.plate')),
-                Forms\Components\TextInput::make('year')
-                    ->label(__('app.year'))
-                    ->numeric(),
-                Select::make('type')
-                    ->label(__('app.type'))
-                    ->options(VehicleTypeEnum::class)
-                    ->required(),
-            ]);
+            ->schema(
+                VehicleFormComponent::getCreateForm()
+            );
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns(
-                \App\Filament\Tables\Components\TableColumns::getDateColumns([
+                \App\Filament\Tables\Components\Columns::getDateColumns([
                     Tables\Columns\TextColumn::make('vehicleMake.name')
                         ->label(__('app.make')),
                     Tables\Columns\TextColumn::make('vehicleModel.name')
@@ -103,11 +65,11 @@ class VehicleResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions(
-                \App\Filament\Tables\Components\TableActions::getActions()
+                \App\Filament\Tables\Components\Actions::getActions()
             )
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make(
-                    \App\Filament\Tables\Components\TableActions::bulkActions()
+                    \App\Filament\Tables\Components\Actions::bulkActions()
                 ),
             ]);
     }

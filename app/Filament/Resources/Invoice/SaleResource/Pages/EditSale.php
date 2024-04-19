@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\Vehicle\VehicleResource\Pages;
+namespace App\Filament\Resources\Invoice\SaleResource\Pages;
 
-use App\Filament\Resources\Vehicle\VehicleResource;
+use App\Filament\Resources\Invoice\SaleResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditVehicle extends EditRecord
+class EditSale extends EditRecord
 {
-    protected static string $resource = VehicleResource::class;
+    protected static string $resource = SaleResource::class;
 
     protected function getHeaderActions(): array
     {

@@ -21,6 +21,7 @@ class ContactFactory extends Factory
             'customer_id' => Customer::factory(),
             'name' => $this->faker->name,
             'phone' => $this->faker->phoneNumber,
+            'identification' => $this->faker->text(50),
         ];
     }
 }

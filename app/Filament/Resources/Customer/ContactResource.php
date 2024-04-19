@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\Customer;
 
+use App\Filament\Forms\Components\Customer\ContactFormComponent;
 use App\Filament\Resources\Customer\ContactResource\Pages;
 use App\Models\Customer\Contact;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -36,27 +36,19 @@ class ContactResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\Select::make('customer_id')
-                    ->label(__('app.customer'))
-                    ->searchable()
-                    ->relationship('customer', 'name')
-                    ->searchable()
-                    ->preload(),
-                Forms\Components\TextInput::make('name')
-                    ->label(__('app.name'))
-                    ->required(),
-                Forms\Components\TextInput::make('phone')
-                    ->label(__('app.phone'))
-                    ->tel(),
-            ]);
+            ->schema(
+                ContactFormComponent::getCreateForm()
+            );
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns(
-                \App\Filament\Tables\Components\TableColumns::getDateColumns([
+                \App\Filament\Tables\Components\Columns::getDateColumns([
+                    Tables\Columns\TextColumn::make('identification')
+                        ->label(__('app.identification'))
+                        ->searchable(),
                     Tables\Columns\TextColumn::make('name')
                         ->label(__('app.name'))
                         ->searchable(),
@@ -69,11 +61,11 @@ class ContactResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions(
-                \App\Filament\Tables\Components\TableActions::getActions()
+                \App\Filament\Tables\Components\Actions::getActions()
             )
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make(
-                    \App\Filament\Tables\Components\TableActions::bulkActions()
+                    \App\Filament\Tables\Components\Actions::bulkActions()
                 ),
             ]);
     }

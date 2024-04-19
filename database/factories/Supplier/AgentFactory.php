@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Supplier;
 
+use App\Models\Supplier\Supplier;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +20,7 @@ class AgentFactory extends Factory
         return [
             'name' => $this->faker->name,
             'phone' => $this->faker->phoneNumber,
+            'supplier_id' => Supplier::factory(),
         ];
     }
 }

@@ -2,17 +2,17 @@
 
 namespace App\Models\Invoice;
 
-use App\Models\Supplier\Agent;
-use App\Models\Vehicle\Vehicle;
-use App\Models\Customer\Contact;
-use App\Models\Supplier\Product;
-use App\Models\Customer\Customer;
-use App\Models\Supplier\Supplier;
 use App\Enums\Invoice\SaleTypeEnum;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Customer\Contact;
+use App\Models\Customer\Customer;
+use App\Models\Supplier\Agent;
+use App\Models\Supplier\Product;
+use App\Models\Supplier\Supplier;
+use App\Models\Vehicle\Vehicle;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Sale extends Model
 {

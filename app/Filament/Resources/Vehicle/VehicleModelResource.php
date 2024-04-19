@@ -53,7 +53,7 @@ class VehicleModelResource extends Resource
     {
         return $table
             ->columns(
-                \App\Filament\Tables\Components\TableColumns::getDateColumns([
+                \App\Filament\Tables\Components\Columns::getDateColumns([
                     Tables\Columns\TextColumn::make('name')
                         ->label(__('app.name'))
                         ->searchable(),
@@ -66,11 +66,11 @@ class VehicleModelResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions(
-                \App\Filament\Tables\Components\TableActions::getActions()
+                \App\Filament\Tables\Components\Actions::getActions()
             )
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make(
-                    \App\Filament\Tables\Components\TableActions::bulkActions()
+                    \App\Filament\Tables\Components\Actions::bulkActions()
                 ),
             ]);
     }

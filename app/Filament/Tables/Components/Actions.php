@@ -4,7 +4,7 @@ namespace App\Filament\Tables\Components;
 
 use Filament\Tables;
 
-class TableActions
+class Actions
 {
     public static function getActions($array = [])
     {

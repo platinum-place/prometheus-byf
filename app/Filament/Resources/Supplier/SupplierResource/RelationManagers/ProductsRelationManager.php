@@ -51,7 +51,7 @@ class ProductsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns(
-                \App\Filament\Tables\Components\TableColumns::getDateColumns([
+                \App\Filament\Tables\Components\Columns::getDateColumns([
                     Tables\Columns\TextColumn::make('name')
                         ->label(__('app.name'))
                         ->searchable(),
@@ -71,11 +71,11 @@ class ProductsRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions(
-                \App\Filament\Tables\Components\TableActions::getActions()
+                \App\Filament\Tables\Components\Actions::getActions()
             )
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make(
-                    \App\Filament\Tables\Components\TableActions::bulkActions()
+                    \App\Filament\Tables\Components\Actions::bulkActions()
                 ),
             ])
             ->modifyQueryUsing(fn (Builder $query) => $query->withoutGlobalScopes([

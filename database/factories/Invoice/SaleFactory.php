@@ -2,13 +2,13 @@
 
 namespace Database\Factories\Invoice;
 
-use App\Models\Supplier\Agent;
-use App\Models\Vehicle\Vehicle;
-use App\Models\Customer\Contact;
-use App\Models\Supplier\Product;
-use App\Models\Customer\Customer;
-use App\Models\Supplier\Supplier;
 use App\Enums\Invoice\SaleTypeEnum;
+use App\Models\Customer\Contact;
+use App\Models\Customer\Customer;
+use App\Models\Supplier\Agent;
+use App\Models\Supplier\Product;
+use App\Models\Supplier\Supplier;
+use App\Models\Vehicle\Vehicle;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -33,7 +33,7 @@ class SaleFactory extends Factory
             'note' => $this->faker->text(),
 
             /**
-             *
+             * Vehicle
              */
             'vehicle_id' => Vehicle::factory(),
             'site_a' => $this->faker->text(),

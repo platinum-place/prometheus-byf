@@ -2,9 +2,9 @@
 
 namespace Database\Factories\Vehicle;
 
+use App\Enums\Vehicle\VehicleTypeEnum;
 use App\Models\Vehicle\VehicleMake;
 use App\Models\Vehicle\VehicleModel;
-use App\Enums\Vehicle\VehicleTypeEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,11 +20,11 @@ class VehicleFactory extends Factory
     public function definition(): array
     {
         return [
-            'color' => $this->faker->text(),
-            'identification' => $this->faker->text(),
-            'plate' => $this->faker->text(),
-            'year' => $this->faker->randomNumber(),
-            'chassis' => $this->faker->text(),
+            'color' => $this->faker->text(5),
+            'identification' => $this->faker->text(10),
+            'plate' => $this->faker->text(10),
+            'year' => $this->faker->randomNumber(4),
+            'chassis' => $this->faker->text(10),
             'type' => $this->faker->randomElement(VehicleTypeEnum::values()),
             'vehicle_model_id' => VehicleModel::factory(),
             'vehicle_make_id' => VehicleMake::factory(),

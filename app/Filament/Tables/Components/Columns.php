@@ -4,7 +4,7 @@ namespace App\Filament\Tables\Components;
 
 use Filament\Tables;
 
-class TableColumns
+class Columns
 {
     public static function getDateColumns($array = [])
     {
