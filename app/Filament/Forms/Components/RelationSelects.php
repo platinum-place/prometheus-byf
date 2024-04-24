@@ -45,8 +45,8 @@ class RelationSelects
                         ->createOptionUsing(function (array $data, Get $get): int {
                             return Contact::create(array_merge($data, ['customer_id' => $get('customer_id')]))->getKey();
                         })
-                        ->afterStateHydrated(function (Select $component, string $state) {
-                            $component->state(Contact::find($state)->name);
+                        ->afterStateHydrated(function (Select $component, ?string $state) {
+                            $component->state(Contact::find($state)?->name);
                         })
                         ->required(),
                 ]),
@@ -75,8 +75,8 @@ class RelationSelects
                             'name',
                             fn (Builder $query, Get $get) => $query->whereVehicleMakeId($get('vehicle_make_id'))
                         )
-                        ->afterStateHydrated(function (Select $component, string $state) {
-                            $component->state(VehicleModel::find($state)->name);
+                        ->afterStateHydrated(function (Select $component, ?string $state) {
+                            $component->state(VehicleModel::find($state)?->name);
                         })
                         ->searchable()
                         ->preload()
@@ -113,8 +113,8 @@ class RelationSelects
                         )
                         ->searchable()
                         ->preload()
-                        ->afterStateHydrated(function (Select $component, string $state) {
-                            $component->state(Agent::find($state)->name);
+                        ->afterStateHydrated(function (Select $component, ?string $state) {
+                            $component->state(Agent::find($state)?->name);
                         })
                         ->required(),
                     Forms\Components\Select::make('product_id')
@@ -126,8 +126,8 @@ class RelationSelects
                         )
                         ->searchable()
                         ->preload()
-                        ->afterStateHydrated(function (Select $component, string $state) {
-                            $component->state(Product::find($state)->name);
+                        ->afterStateHydrated(function (Select $component, ?string $state) {
+                            $component->state(Product::find($state)?->name);
                         })
                         ->required(),
                 ]),

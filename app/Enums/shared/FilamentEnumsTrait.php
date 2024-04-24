@@ -6,7 +6,7 @@ trait FilamentEnumsTrait
 {
     public function getLabel(): ?string
     {
-        return $this->langName(); /* Any string works so...*/
+        return $this->label(); /* Any string works so...*/
     }
 
     public function getColor(): string|array|null

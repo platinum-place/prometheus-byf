@@ -1,11 +1,11 @@
 <?php
 
+use App\Enums\Invoice\InvoiceStateEnum;
 use App\Models\Customer\Contact;
 use App\Models\Customer\Customer;
-use Illuminate\Support\Facades\Schema;
-use App\Enums\Invoice\InvoiceStateEnum;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {

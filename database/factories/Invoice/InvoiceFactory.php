@@ -2,9 +2,9 @@
 
 namespace Database\Factories\Invoice;
 
+use App\Enums\Invoice\InvoiceStateEnum;
 use App\Models\Customer\Contact;
 use App\Models\Customer\Customer;
-use App\Enums\Invoice\InvoiceStateEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

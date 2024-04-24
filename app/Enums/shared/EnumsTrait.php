@@ -19,7 +19,7 @@ trait EnumsTrait
     /**
      * All translates are in lang/(es,en,etc)/enums.php
      */
-    public function langName(): string
+    public function label(): string
     {
         return __('app.'.$this->name);
     }
