@@ -6,6 +6,7 @@ use App\Enums\RoleEnum;
 use App\Policies\RolePolicy;
 use Spatie\Permission\Models\Role;
 use App\Models\Vehicle\VehicleMake;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
@@ -35,5 +36,9 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Gate::policy(Role::class, RolePolicy::class);
+
+        if ($this->app->environment('production')) {
+            URL::forceScheme('https');
+        }
     }
 }
