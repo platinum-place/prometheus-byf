@@ -3,9 +3,13 @@
 namespace App\Providers;
 
 use App\Enums\RoleEnum;
-use Illuminate\Database\Eloquent\Model;
+use App\Policies\RolePolicy;
+use Spatie\Permission\Models\Role;
+use App\Models\Vehicle\VehicleMake;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use App\Policies\Vehicle\VehicleMakePolicy;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,5 +33,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::before(function ($user, $ability) {
             return $user->hasRole(RoleEnum::admin->value) ? true : null;
         });
+
+        Gate::policy(Role::class, RolePolicy::class);
     }
 }

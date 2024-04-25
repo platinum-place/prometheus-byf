@@ -3,13 +3,10 @@
 namespace Database\Seeders;
 
 use App\Enums\ModelEnum;
-use App\Enums\RoleEnum;
 use App\Enums\PermissionEnum;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\PermissionRegistrar;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class PermissionSeeder extends Seeder
 {
