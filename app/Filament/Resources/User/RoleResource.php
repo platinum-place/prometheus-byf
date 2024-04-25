@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\User;
 
-use App\Filament\Resources\RoleResource\Pages;
-use App\Filament\Resources\RoleResource\RelationManagers;
+use App\Filament\Resources\User\RoleResource\Pages;
+use App\Filament\Resources\User\RoleResource\RelationManagers;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -44,10 +44,13 @@ class RoleResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([
+        ->columns(
+            \App\Filament\Tables\Components\Columns::getDateColumns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label(__('app.name')),
+                    ->label(__('app.name'))
+                    ->searchable(),
             ])
+        )
             ->filters([
                 //
             ])

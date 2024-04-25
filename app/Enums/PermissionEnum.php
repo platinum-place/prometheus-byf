@@ -10,11 +10,17 @@ enum PermissionEnum: int implements HasLabel
 {
     use EnumsTrait, FilamentEnumsTrait;
 
-    case create = 1;
+    case viewAny = 1;
 
-    case read = 2;
+    case view = 2;
 
-    case update = 3;
+    case create = 3;
 
-    case delete = 4;
+    case update = 4;
+
+    case delete = 5;
+
+    case restore = 6;
+
+    case forceDelete = 7;
 }

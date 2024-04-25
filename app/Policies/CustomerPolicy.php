@@ -2,8 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\Customer\Customer;
 use App\Models\User;
+use App\Enums\ModelEnum;
+use App\Enums\PermissionEnum;
+use App\Models\Customer\Customer;
 
 class CustomerPolicy
 {
@@ -12,7 +14,7 @@ class CustomerPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::viewAny, ModelEnum::customer);
     }
 
     /**
@@ -20,7 +22,7 @@ class CustomerPolicy
      */
     public function view(User $user, Customer $customer): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::view, ModelEnum::customer);
     }
 
     /**
@@ -28,7 +30,7 @@ class CustomerPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::create, ModelEnum::customer);
     }
 
     /**
@@ -36,7 +38,7 @@ class CustomerPolicy
      */
     public function update(User $user, Customer $customer): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::update, ModelEnum::customer);
     }
 
     /**
@@ -44,7 +46,7 @@ class CustomerPolicy
      */
     public function delete(User $user, Customer $customer): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::delete, ModelEnum::customer);
     }
 
     /**
@@ -52,7 +54,7 @@ class CustomerPolicy
      */
     public function restore(User $user, Customer $customer): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::restore, ModelEnum::customer);
     }
 
     /**
@@ -60,6 +62,6 @@ class CustomerPolicy
      */
     public function forceDelete(User $user, Customer $customer): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::forceDelete, ModelEnum::customer);
     }
 }

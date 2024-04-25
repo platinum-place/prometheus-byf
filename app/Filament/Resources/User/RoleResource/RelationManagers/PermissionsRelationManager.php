@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\RoleResource\RelationManagers;
+namespace App\Filament\Resources\User\RoleResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -8,6 +8,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\PermissionRegistrar;
 
 class PermissionsRelationManager extends RelationManager
 {
@@ -22,16 +23,6 @@ class PermissionsRelationManager extends RelationManager
     {
         return __('app.permission');
     }
-
-    // public function form(Form $form): Form
-    // {
-    //     return $form
-    //         ->schema([
-    //             Forms\Components\TextInput::make('name')
-    //                 ->required()
-    //                 ->maxLength(255),
-    //         ]);
-    // }
 
     public function table(Table $table): Table
     {
@@ -49,10 +40,18 @@ class PermissionsRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\AttachAction::make()
-                    ->preloadRecordSelect(),
+                    ->preloadRecordSelect()
+                    ->after(function () {
+                        // Reset cached roles and permissions
+                        app()[PermissionRegistrar::class]->forgetCachedPermissions();
+                    }),
             ])
             ->actions([
-                Tables\Actions\DetachAction::make(),
+                Tables\Actions\DetachAction::make()
+                    ->after(function () {
+                        // Reset cached roles and permissions
+                        app()[PermissionRegistrar::class]->forgetCachedPermissions();
+                    }),
             ])
             ->bulkActions([
                 //

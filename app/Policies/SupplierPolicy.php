@@ -2,8 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\Supplier\Supplier;
 use App\Models\User;
+use App\Enums\ModelEnum;
+use App\Enums\PermissionEnum;
+use App\Models\Supplier\Supplier;
 
 class SupplierPolicy
 {
@@ -12,7 +14,7 @@ class SupplierPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::viewAny, ModelEnum::supplier);
     }
 
     /**
@@ -20,7 +22,7 @@ class SupplierPolicy
      */
     public function view(User $user, Supplier $supplier): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::view, ModelEnum::supplier);
     }
 
     /**
@@ -28,7 +30,7 @@ class SupplierPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::create, ModelEnum::supplier);
     }
 
     /**
@@ -36,7 +38,7 @@ class SupplierPolicy
      */
     public function update(User $user, Supplier $supplier): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::update, ModelEnum::supplier);
     }
 
     /**
@@ -44,7 +46,7 @@ class SupplierPolicy
      */
     public function delete(User $user, Supplier $supplier): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::delete, ModelEnum::supplier);
     }
 
     /**
@@ -52,7 +54,7 @@ class SupplierPolicy
      */
     public function restore(User $user, Supplier $supplier): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::restore, ModelEnum::supplier);
     }
 
     /**
@@ -60,6 +62,6 @@ class SupplierPolicy
      */
     public function forceDelete(User $user, Supplier $supplier): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::forceDelete, ModelEnum::supplier);
     }
 }

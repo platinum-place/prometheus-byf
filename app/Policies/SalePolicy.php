@@ -2,8 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\Invoice\Sale;
 use App\Models\User;
+use App\Enums\ModelEnum;
+use App\Models\Invoice\Sale;
+use App\Enums\PermissionEnum;
 
 class SalePolicy
 {
@@ -12,7 +14,7 @@ class SalePolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::viewAny, ModelEnum::sale);
     }
 
     /**
@@ -20,7 +22,7 @@ class SalePolicy
      */
     public function view(User $user, Sale $sale): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::view, ModelEnum::sale);
     }
 
     /**
@@ -28,7 +30,7 @@ class SalePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::create, ModelEnum::sale);
     }
 
     /**
@@ -36,7 +38,7 @@ class SalePolicy
      */
     public function update(User $user, Sale $sale): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::update, ModelEnum::sale);
     }
 
     /**
@@ -44,7 +46,7 @@ class SalePolicy
      */
     public function delete(User $user, Sale $sale): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::delete, ModelEnum::sale);
     }
 
     /**
@@ -52,7 +54,7 @@ class SalePolicy
      */
     public function restore(User $user, Sale $sale): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::restore, ModelEnum::sale);
     }
 
     /**
@@ -60,6 +62,6 @@ class SalePolicy
      */
     public function forceDelete(User $user, Sale $sale): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::forceDelete, ModelEnum::sale);
     }
 }

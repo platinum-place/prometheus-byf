@@ -2,6 +2,8 @@
 
 namespace App\Policies;
 
+use App\Enums\ModelEnum;
+use App\Enums\PermissionEnum;
 use App\Models\Supplier\Agent;
 use App\Models\User;
 
@@ -12,7 +14,7 @@ class AgentPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::viewAny, ModelEnum::agent);
     }
 
     /**
@@ -20,7 +22,7 @@ class AgentPolicy
      */
     public function view(User $user, Agent $agent): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::view, ModelEnum::agent);
     }
 
     /**
@@ -28,7 +30,7 @@ class AgentPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::create, ModelEnum::agent);
     }
 
     /**
@@ -36,7 +38,7 @@ class AgentPolicy
      */
     public function update(User $user, Agent $agent): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::update, ModelEnum::agent);
     }
 
     /**
@@ -44,7 +46,7 @@ class AgentPolicy
      */
     public function delete(User $user, Agent $agent): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::delete, ModelEnum::agent);
     }
 
     /**
@@ -52,7 +54,7 @@ class AgentPolicy
      */
     public function restore(User $user, Agent $agent): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::restore, ModelEnum::agent);
     }
 
     /**
@@ -60,6 +62,6 @@ class AgentPolicy
      */
     public function forceDelete(User $user, Agent $agent): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::forceDelete, ModelEnum::agent);
     }
 }

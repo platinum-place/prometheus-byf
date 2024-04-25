@@ -2,8 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\Supplier\Product;
 use App\Models\User;
+use App\Enums\ModelEnum;
+use App\Enums\PermissionEnum;
+use App\Models\Supplier\Product;
 
 class ProductPolicy
 {
@@ -12,7 +14,7 @@ class ProductPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::viewAny, ModelEnum::product);
     }
 
     /**
@@ -20,7 +22,7 @@ class ProductPolicy
      */
     public function view(User $user, Product $product): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::view, ModelEnum::product);
     }
 
     /**
@@ -28,7 +30,7 @@ class ProductPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::create, ModelEnum::product);
     }
 
     /**
@@ -36,7 +38,7 @@ class ProductPolicy
      */
     public function update(User $user, Product $product): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::update, ModelEnum::product);
     }
 
     /**
@@ -44,7 +46,7 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::delete, ModelEnum::product);
     }
 
     /**
@@ -52,7 +54,7 @@ class ProductPolicy
      */
     public function restore(User $user, Product $product): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::restore, ModelEnum::product);
     }
 
     /**
@@ -60,6 +62,6 @@ class ProductPolicy
      */
     public function forceDelete(User $user, Product $product): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::forceDelete, ModelEnum::product);
     }
 }

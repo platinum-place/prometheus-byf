@@ -2,8 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\Customer\Contact;
 use App\Models\User;
+use App\Enums\ModelEnum;
+use App\Enums\PermissionEnum;
+use App\Models\Customer\Contact;
 
 class ContactPolicy
 {
@@ -12,7 +14,7 @@ class ContactPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::viewAny, ModelEnum::contact);
     }
 
     /**
@@ -20,7 +22,7 @@ class ContactPolicy
      */
     public function view(User $user, Contact $contact): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::view, ModelEnum::contact);
     }
 
     /**
@@ -28,7 +30,7 @@ class ContactPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::create, ModelEnum::contact);
     }
 
     /**
@@ -36,7 +38,7 @@ class ContactPolicy
      */
     public function update(User $user, Contact $contact): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::update, ModelEnum::contact);
     }
 
     /**
@@ -44,7 +46,7 @@ class ContactPolicy
      */
     public function delete(User $user, Contact $contact): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::delete, ModelEnum::contact);
     }
 
     /**
@@ -52,7 +54,7 @@ class ContactPolicy
      */
     public function restore(User $user, Contact $contact): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::restore, ModelEnum::contact);
     }
 
     /**
@@ -60,6 +62,6 @@ class ContactPolicy
      */
     public function forceDelete(User $user, Contact $contact): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::forceDelete, ModelEnum::contact);
     }
 }

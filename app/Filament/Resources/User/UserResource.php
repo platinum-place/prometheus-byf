@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\User;
 
-use App\Filament\Resources\RoleResource\RelationManagers as Role_RelationManagers;
-use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
+use App\Filament\Resources\User\RoleResource\RelationManagers as Role_RelationManagers;
+use App\Filament\Resources\User\UserResource\Pages;
+use App\Filament\Resources\User\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;

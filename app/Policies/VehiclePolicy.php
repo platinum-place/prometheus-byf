@@ -3,6 +3,8 @@
 namespace App\Policies;
 
 use App\Models\User;
+use App\Enums\ModelEnum;
+use App\Enums\PermissionEnum;
 use App\Models\Vehicle\Vehicle;
 
 class VehiclePolicy
@@ -12,7 +14,7 @@ class VehiclePolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::viewAny, ModelEnum::vehicle);
     }
 
     /**
@@ -20,7 +22,7 @@ class VehiclePolicy
      */
     public function view(User $user, Vehicle $vehicle): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::view, ModelEnum::vehicle);
     }
 
     /**
@@ -28,7 +30,7 @@ class VehiclePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::create, ModelEnum::vehicle);
     }
 
     /**
@@ -36,7 +38,7 @@ class VehiclePolicy
      */
     public function update(User $user, Vehicle $vehicle): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::update, ModelEnum::vehicle);
     }
 
     /**
@@ -44,7 +46,7 @@ class VehiclePolicy
      */
     public function delete(User $user, Vehicle $vehicle): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::delete, ModelEnum::vehicle);
     }
 
     /**
@@ -52,7 +54,7 @@ class VehiclePolicy
      */
     public function restore(User $user, Vehicle $vehicle): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::restore, ModelEnum::vehicle);
     }
 
     /**
@@ -60,6 +62,6 @@ class VehiclePolicy
      */
     public function forceDelete(User $user, Vehicle $vehicle): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::forceDelete, ModelEnum::vehicle);
     }
 }

@@ -2,8 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\Invoice\Invoice;
 use App\Models\User;
+use App\Enums\ModelEnum;
+use App\Enums\PermissionEnum;
+use App\Models\Invoice\Invoice;
 
 class InvoicePolicy
 {
@@ -12,7 +14,7 @@ class InvoicePolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::viewAny, ModelEnum::invoice);
     }
 
     /**
@@ -20,7 +22,7 @@ class InvoicePolicy
      */
     public function view(User $user, Invoice $invoice): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::view, ModelEnum::invoice);
     }
 
     /**
@@ -28,7 +30,7 @@ class InvoicePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::create, ModelEnum::invoice);
     }
 
     /**
@@ -36,7 +38,7 @@ class InvoicePolicy
      */
     public function update(User $user, Invoice $invoice): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::update, ModelEnum::invoice);
     }
 
     /**
@@ -44,7 +46,7 @@ class InvoicePolicy
      */
     public function delete(User $user, Invoice $invoice): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::delete, ModelEnum::invoice);
     }
 
     /**
@@ -52,7 +54,7 @@ class InvoicePolicy
      */
     public function restore(User $user, Invoice $invoice): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::restore, ModelEnum::invoice);
     }
 
     /**
@@ -60,6 +62,6 @@ class InvoicePolicy
      */
     public function forceDelete(User $user, Invoice $invoice): bool
     {
-        return false;
+        return $user->hasPermission(PermissionEnum::forceDelete, ModelEnum::invoice);
     }
 }
