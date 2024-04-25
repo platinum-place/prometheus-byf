@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Enums\ModelEnum;
 use App\Enums\PermissionEnum;
+use App\Models\User;
 use App\Models\Vehicle\VehicleModel;
 
 class VehicleModelPolicy
