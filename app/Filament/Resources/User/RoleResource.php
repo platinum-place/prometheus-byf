@@ -44,13 +44,13 @@ class RoleResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-        ->columns(
-            \App\Filament\Tables\Components\Columns::getDateColumns([
-                Tables\Columns\TextColumn::make('name')
-                    ->label(__('app.name'))
-                    ->searchable(),
-            ])
-        )
+            ->columns(
+                \App\Filament\Tables\Components\Columns::getDateColumns([
+                    Tables\Columns\TextColumn::make('name')
+                        ->label(__('app.name'))
+                        ->searchable(),
+                ])
+            )
             ->filters([
                 //
             ])

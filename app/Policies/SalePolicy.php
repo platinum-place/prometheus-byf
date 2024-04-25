@@ -2,10 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Enums\ModelEnum;
-use App\Models\Invoice\Sale;
 use App\Enums\PermissionEnum;
+use App\Models\Invoice\Sale;
+use App\Models\User;
 
 class SalePolicy
 {
