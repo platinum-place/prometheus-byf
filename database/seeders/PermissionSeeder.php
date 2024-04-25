@@ -26,9 +26,8 @@ class PermissionSeeder extends Seeder
             foreach (ModelEnum::cases() as $model) {
                 $name = "$permission->name-$model->name";
                 Permission::updateOrCreate([
-                    'id' => $permission->value,
+                    'name' => $name,
                 ], [
-                    'id' => $permission->value,
                     'name' => $name,
                 ]);
             }

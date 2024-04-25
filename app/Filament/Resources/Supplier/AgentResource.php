@@ -16,7 +16,7 @@ class AgentResource extends Resource
 {
     protected static ?string $model = Agent::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
 
     public static function getModelLabel(): string
     {

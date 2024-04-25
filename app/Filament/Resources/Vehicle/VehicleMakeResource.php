@@ -17,7 +17,7 @@ class VehicleMakeResource extends Resource
 {
     protected static ?string $model = VehicleMake::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-truck';
 
     public static function getModelLabel(): string
     {
