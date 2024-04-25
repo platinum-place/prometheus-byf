@@ -25,4 +25,11 @@ class Actions
             Tables\Actions\RestoreBulkAction::make(),
         ]);
     }
+
+    public static function headerActions($array = [])
+    {
+        return array_merge($array, [
+            Tables\Actions\CreateAction::make(),
+        ]);
+    }
 }

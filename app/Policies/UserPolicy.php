@@ -2,8 +2,11 @@
 
 namespace App\Policies;
 
-use App\Enums\RoleEnum;
 use App\Models\User;
+use App\Enums\RoleEnum;
+use App\Enums\userEnum;
+use App\Enums\ModelEnum;
+use App\Enums\PermissionEnum;
 
 class UserPolicy
 {
@@ -12,7 +15,7 @@ class UserPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user?->hasRole(RoleEnum::admin->value);
+        return $user->hasPermission(PermissionEnum::viewAny, ModelEnum::user);
     }
 
     /**
@@ -20,7 +23,10 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return $user?->hasRole(RoleEnum::admin->value);
+        if ($model->hasRole(RoleEnum::admin->value)) {
+            return false;
+        }
+        return $user->hasPermission(PermissionEnum::view, ModelEnum::user);
     }
 
     /**
@@ -28,7 +34,7 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        return $user?->hasRole(RoleEnum::admin->value);
+        return $user->hasPermission(PermissionEnum::create, ModelEnum::user);
     }
 
     /**
@@ -36,7 +42,10 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return $user?->hasRole(RoleEnum::admin->value);
+        if ($model->hasRole(RoleEnum::admin->value)) {
+            return false;
+        }
+        return $user->hasPermission(PermissionEnum::update, ModelEnum::user);
     }
 
     /**
@@ -44,7 +53,10 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return $user?->hasRole(RoleEnum::admin->value);
+        if ($model->hasRole(RoleEnum::admin->value)) {
+            return false;
+        }
+        return $user->hasPermission(PermissionEnum::delete, ModelEnum::user);
     }
 
     /**
@@ -52,7 +64,7 @@ class UserPolicy
      */
     public function restore(User $user, User $model): bool
     {
-        return $user?->hasRole(RoleEnum::admin->value);
+        return $user->hasPermission(PermissionEnum::restore, ModelEnum::user);
     }
 
     /**
@@ -60,6 +72,6 @@ class UserPolicy
      */
     public function forceDelete(User $user, User $model): bool
     {
-        return $user?->hasRole(RoleEnum::admin->value);
+        return $user->hasPermission(PermissionEnum::forceDelete, ModelEnum::user);
     }
 }
