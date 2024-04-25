@@ -31,4 +31,6 @@ enum ModelEnum: int implements HasLabel
     case customer = 10;
 
     case contact = 11;
+
+    case role = 12;
 }

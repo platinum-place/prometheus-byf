@@ -2,7 +2,8 @@
 
 namespace App\Policies;
 
-use App\Enums\RoleEnum;
+use App\Enums\ModelEnum;
+use App\Enums\PermissionEnum;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 
@@ -13,7 +14,7 @@ class RolePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(RoleEnum::admin->value);
+        return $user->hasPermission(PermissionEnum::viewAny, ModelEnum::role);
     }
 
     /**
@@ -21,7 +22,11 @@ class RolePolicy
      */
     public function view(User $user, Role $role): bool
     {
-        return $user->hasRole(RoleEnum::admin->value);
+        if ($role->id == ModelEnum::role->value) {
+            return false;
+        }
+
+        return $user->hasPermission(PermissionEnum::view, ModelEnum::role);
     }
 
     /**
@@ -29,7 +34,7 @@ class RolePolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(RoleEnum::admin->value);
+        return $user->hasPermission(PermissionEnum::create, ModelEnum::role);
     }
 
     /**
@@ -37,7 +42,11 @@ class RolePolicy
      */
     public function update(User $user, Role $role): bool
     {
-        return $user->hasRole(RoleEnum::admin->value);
+        if ($role->id == ModelEnum::role->value) {
+            return false;
+        }
+
+        return $user->hasPermission(PermissionEnum::update, ModelEnum::role);
     }
 
     /**
@@ -45,22 +54,10 @@ class RolePolicy
      */
     public function delete(User $user, Role $role): bool
     {
-        return $user->hasRole(RoleEnum::admin->value);
-    }
+        if ($role->id == ModelEnum::role->value) {
+            return false;
+        }
 
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Role $role): bool
-    {
-        return $user->hasRole(RoleEnum::admin->value);
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Role $role): bool
-    {
-        return $user->hasRole(RoleEnum::admin->value);
+        return $user->hasPermission(PermissionEnum::delete, ModelEnum::role);
     }
 }

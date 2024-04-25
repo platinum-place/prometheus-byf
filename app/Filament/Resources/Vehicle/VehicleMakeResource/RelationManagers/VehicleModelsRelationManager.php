@@ -49,11 +49,16 @@ class VehicleModelsRelationManager extends RelationManager
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
-            ->headerActions([
-                Tables\Actions\CreateAction::make(),
-            ])
+            ->headerActions(
+                \App\Filament\Tables\Components\Actions::headerActions([
+                    Tables\Actions\AttachAction::make()
+                        ->preloadRecordSelect(),
+                ])
+            )
             ->actions(
-                \App\Filament\Tables\Components\Actions::getActions()
+                \App\Filament\Tables\Components\Actions::getActions([
+                    Tables\Actions\DetachAction::make(),
+                ])
             )
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make(

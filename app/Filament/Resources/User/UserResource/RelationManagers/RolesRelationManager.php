@@ -50,6 +50,7 @@ class RolesRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
+                Tables\Actions\CreateAction::make(),
                 Tables\Actions\AttachAction::make()
                     ->preloadRecordSelect()
                     ->after(function () {
@@ -58,6 +59,10 @@ class RolesRelationManager extends RelationManager
                     }),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+
                 Tables\Actions\DetachAction::make()
                     ->after(function () {
                         // Reset cached roles and permissions
