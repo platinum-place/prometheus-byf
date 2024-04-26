@@ -38,6 +38,7 @@ class PermissionsRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\AttachAction::make()
+                    ->multiple()
                     ->preloadRecordSelect()
                     ->after(function () {
                         // Reset cached roles and permissions
