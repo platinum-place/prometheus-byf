@@ -37,6 +37,7 @@ class RoleResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label(__('app.name'))
                     ->required(),
             ]);
     }

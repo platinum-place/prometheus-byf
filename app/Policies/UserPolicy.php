@@ -2,11 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\User;
-use App\Enums\RoleEnum;
-use App\Enums\userEnum;
 use App\Enums\ModelEnum;
 use App\Enums\PermissionEnum;
+use App\Enums\RoleEnum;
+use App\Models\User;
 
 class UserPolicy
 {
@@ -26,6 +25,7 @@ class UserPolicy
         if ($model->hasRole(RoleEnum::admin->value)) {
             return false;
         }
+
         return $user->hasPermission(PermissionEnum::view, ModelEnum::user);
     }
 
@@ -45,6 +45,7 @@ class UserPolicy
         if ($model->hasRole(RoleEnum::admin->value)) {
             return false;
         }
+
         return $user->hasPermission(PermissionEnum::update, ModelEnum::user);
     }
 
@@ -56,6 +57,7 @@ class UserPolicy
         if ($model->hasRole(RoleEnum::admin->value)) {
             return false;
         }
+
         return $user->hasPermission(PermissionEnum::delete, ModelEnum::user);
     }
 
